@@ -1,0 +1,10 @@
+Justin Paper
+https://arxiv.org/pdf/1607.02470.pdf
+
+Loan-level Dataset Overview: http://www.freddiemac.com/research/pdf/user_guide.pdf
+
+Dataset: http://www.freddiemac.com/research/datasets/sf_loanlevel_dataset.html
+
+usedid: ghosh17@illinois.edu
+password: Z9TZZ~x{
+
