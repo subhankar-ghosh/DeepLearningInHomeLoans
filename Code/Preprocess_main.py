@@ -8,6 +8,9 @@ import time
 
 
 def main():
+    '''
+    Main function to preprocess data. This function uses the Preprocess class.
+    '''
     dataDirectory = './Data/ToProcessData'
     preprocessor = Preprocess(dataDirectory)
     print('Object created')
