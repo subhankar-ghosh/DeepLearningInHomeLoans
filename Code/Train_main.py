@@ -18,6 +18,10 @@ from sklearn.metrics import roc_auc_score
 from sklearn.metrics import precision_recall_curve, roc_curve
 
 def main():
+    '''
+    This function is the main class where training and testing are initiated.
+    Parameters are set here.
+    '''
     # hdf_file_path: Loan_Data
     # Create Train, test, validation set
     # key_len = 1635
