@@ -15,6 +15,10 @@ class DataGen:
         self.hdf_file_path = ''
 
     def GenerateIndependentData(self, t, file_type):
+        '''
+        Preprocess data in such a way that every month data are i.i.d data points.
+        Mainly for Feed forward
+        '''
         if file_type == 'train':
             self.hdf_file_path = self.hdf_file_path_train
         else:
@@ -38,6 +42,14 @@ class DataGen:
         return (X, y)
 
     def DataCreatorSequence(self, t, file_type, max_len=135):
+        '''
+        Preprocess data in such a way that one datapoint is a collection of all month data in a loan.
+        Example: In Loan L1 the monthly data are m1, m2, m3 then this function returns
+        [m1, m2, m3]
+        In Loan L2 the monthly data are m1, m2, m3, m4, m5 then this function returns
+        [m1, m2, m3, m4, m5]
+        Mainly for LSTM
+        '''
         if file_type == 'train':
             self.hdf_file_path = self.hdf_file_path_train
         else:
