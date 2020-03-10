@@ -17,6 +17,11 @@ from sklearn.metrics import precision_recall_curve, roc_curve
 
 
 class ModelTrainer:
+    '''
+    Class Model Trainer includes all function implementations for training and testing.
+    Training happens as a binary classification, so it is like a one-vs-all kind of training.
+    concerned_class in the constructor is the class we want to identify.
+    '''
     def __init__(self, model, learning_rate, num_epochs, concerned_class, data_file_name_train, data_file_name_test, device):
         self.input_size = 110
         self.num_classes = len(config.unique_values['current_status'])
@@ -40,6 +45,9 @@ class ModelTrainer:
         self.model = self.model.to(self.device)
 
     def trainFF(self, train, test):
+        '''
+        Training, testing and evaluation of a feed forward network
+        '''
         datagen = DataGen(self.data_file_name_train, self.data_file_name_test)
         for epoch in range(self.num_epochs):
             correct = 0
@@ -108,6 +116,9 @@ class ModelTrainer:
 
 
     def trainLSTM(self, train, test):
+        '''
+        Training, Testing and Evaluation of LSTM.
+        '''
         datagen = DataGen(self.data_file_name_train, self.data_file_name_test)
         # sftmx_layer = F.log_softmax()
         rolling_loss = 0
@@ -240,6 +251,9 @@ class ModelTrainer:
 
 
     def accumulate_truth(self, iterable):
+        '''
+        Helper function to calculate AUC
+        '''
         true = 0
         false = 0
         for i in iterable:
@@ -251,6 +265,9 @@ class ModelTrainer:
 
 
     def home_made_ROC(self, scores, targets):
+        '''
+        Custom code to Calculate ROC
+        '''
         total_targets = sum(targets)
         length_sub_targets = len(targets) - total_targets
 
@@ -264,6 +281,9 @@ class ModelTrainer:
 
 
     def home_made_AUC(self, TPR, FPR):
+        '''
+        Custom code to Calculate AUC
+        '''
         dFPR = np.zeros(len(FPR))
         dTPR = np.zeros(len(TPR))
         dFPR[:-1] = np.diff(FPR)
@@ -275,10 +295,11 @@ class ModelTrainer:
 
 
     def GetAUCScore(self, y_actual, predicted_score, concerned_class, is_transition=False, save_results=False):
+        '''
+        Returns AUC score given predicted score and actual y values.
+        '''
         ### y_actual: one hot encoding of all classes. np array of shape n x num_of_classes
         ### predicted_score: np array of shape n x num_of_classes containing probabilities
-        ### PrintMatrix(predicted_score)
-        # print(np.min(predicted_score), np.max(predicted_score))
         try:
         # print(predicted_score[:100, 0])
         # print('#################################')
