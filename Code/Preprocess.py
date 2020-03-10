@@ -7,6 +7,16 @@ import time
 
 class Preprocess:
 	def __init__(self, rootDir):
+		```
+		# Constructor of the Preprocess class.
+		# Defines datatypes for all columns of the data.
+		# Defines load names or class variable.
+		# Defines variables to be one hot encoded.
+		# Defines chunk size - since the files are too huge they need to be read in chunks.
+		# Args: 
+		#  	rootDir: Path to the directory that contains raw data
+		
+		```
 		self.rootDir = rootDir
 		self.loan_dtypes = {'credit_score': np.int64, 'first_payment_date': np.float32, 'first_time': object, 'mat_date': np.float32, 'msa':np.float64,\
 		 'mortgage_insurance':np.float64, 'channel': object, 'PPM': object, 'product_type': object, 'state': object, 'property_type': object, \
@@ -16,13 +26,6 @@ class Preprocess:
 		# Define column names for loan data
 		self.loan_name = ['credit_score', 'first_payment_date', 'first_time', 'mat_date', 'msa', 'mortgage_insurance', 'num_units', 'occupancy', 'CLTV', 'DTI', 'UPB', 'LTV', 'original_interest_rate','channel', 'PPM','product_type', 'state', 'property_type', 'postal_code', 'loan_number','purpose', 'original_loan_term', 'num_borrowers', 'seller', 'servicer', 'super_conforming_flag', 'preharp_seq_num']
 		# Define data types for monthly data
-		# current_UPB
-		# self.monthly_dtypes = {'loan_number': object, 'monthly_period': np.float64, 'current_UPB': np.float64, 'current_status': object,\
-		#  'loan_age': np.float64, 'remaining_month': object, 'repurchase_flag': object, 'modification_flag': object, 'zero_balance': np.float64,\
-		#   'zero_balance_date': np.float64, 'current_interest_rate': np.float64, 'current_deferred_UPB': np.float64, 'DDLPI': np.float64,\
-		#    'mi_recovery': np.float64, 'net_sales_procedees': object, 'non_mi_recovery': np.float64, 'expenses': np.float64, 'legal_cost': np.float64,\
-		#    'maintainance_cost': np.float64, 'tax': np.float64, 'misc_cost': np.float64, 'actual_loss': np.float64, 'modification_cost': np.float64,\
-		#     'step_modification_flag': object, 'deferred_payment_mod': object}
 		self.monthly_dtypes = {'loan_number': object, 'monthly_period': np.float32, 'current_UPB': object, 'current_status': object,\
 		 'loan_age': np.float32, 'remaining_month': object, 'repurchase_flag': object, 'modification_flag': object, 'zero_balance': np.float32,\
 		  'zero_balance_date': np.float32, 'current_interest_rate': np.float32, 'current_deferred_UPB': np.float32, 'DDLPI': np.float32,\
@@ -43,6 +46,13 @@ class Preprocess:
 		self.logfile.close()
 
 	def ReadData(self, dirName, filenames):
+		```
+		# Reads data from raw files. Two types of files are there.
+		# (1) Loan data files - files with information about every single loan
+		# (2) Monthly data files - Files with each row corresponding to one month data of a loan,
+		# 	Every monthly data row has a loan number which corresponds to a unique loan in
+		# 	Loan data file.
+		```
 		loan_data_temp, monthly_data_temp = None, None
 		for f in filenames:
 			if 'time' in f:
@@ -59,6 +69,12 @@ class Preprocess:
 		return (loan_data_temp, monthly_data_temp)
 
 	def PreprocessData(self):
+		'''
+		Preprocesses every file and populate lookup table.
+		Lookup table can be thought of as a hash for easy retrieval during training.
+			Lookup table stores loan numbers as keys and corresponding monthly data
+			rows as values.
+		'''
 		index = 0
 		max_loan_duration = -1
 		self.logfile = open(os.path.join('./', 'info.txt'), 'w+')
