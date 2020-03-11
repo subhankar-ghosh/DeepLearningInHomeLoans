@@ -19,9 +19,14 @@ Run `python3 Preprocess_main.py` to start preprocessing the data. We have to pro
 
 We consider `monthly status` of the loans as label of the data. It has values like `Current` means payment is made on time, `30-days delinquency` means not paid for 30 days, `60-days delinquency` means not paid for 60 days, ..., `Prepayment` loan is pre paid before end of loan date and more, check the *Loan-level Dataset Overview*.
 
+We consider binary classification problems:
+  - **30-days delinquency VS all**: Predict if next month will be 30-days delinquent or not 
+  - **Prepayment VS all**: Predict if next month will be prepayment or not
+
 ### Algorithms
 
 We compare 3 algorithms:
   - Logistic Regression
   - Feed forward Neural Network
   - LSTM
+  
