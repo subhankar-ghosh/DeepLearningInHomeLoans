@@ -29,4 +29,33 @@ We compare 3 algorithms:
   - Logistic Regression
   - Feed forward Neural Network
   - LSTM
+
+The models are defined in `Models.py`
+
+### Training
+
+Files:
+  - `DataGen.py`: This file has code to structure and preprocess data from hdfs files into a format that can be directly fed to the models. More information is provided in the definition of the methods about what they do.
+  - `ModelTrainer.py`: Defines training loop, testing loop and metric definition.
+  - `Train_main.py`: Defines parameters and hyperparameters of the model and calling `ModelTrainer.py` functions to train and test.
+  - `config.py`: Defines all the configurations in this file.
   
+ ### Results
+ 
+ Detailed multiple reports are present in `Reports` folder.
+ 
+Table to show Max AUC and Mean AUC for 30 days delinquency.
+ 
+| | Max AUC | Mean of AUC |
+| ------------- |:-------------:| -----:|
+Logistic Regression |0.710236 | 0.667079 |
+Feed forward network | 0.716513 | 0.700304 |
+LSTM | 0.742221 | 0.653029 |
+
+Table to show Max AUC and Mean AUC for Prepayment.
+
+| | Max AUC | Mean of AUC |
+| ------------- |:-------------:| -----:|
+| Logistic Regression | 0.558171 | 0.535332 |
+| Feed forward network | 0.631124 | 0.593673 |
+| LSTM | 0.769554 | 0.721963 |
