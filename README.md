@@ -40,6 +40,8 @@ Files:
   - `Train_main.py`: Defines parameters and hyperparameters of the model and calling `ModelTrainer.py` functions to train and test.
   - `config.py`: Defines all the configurations in this file.
   
+Update the configs in `config.py`, parameters and hyperparameters in `Train_main.py` and then run `python3 Train_main.py`.
+  
  ### Results
  
  Detailed multiple reports are present in `Reports` folder.
